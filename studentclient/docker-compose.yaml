@@ -1,0 +1,21 @@
+version: '3'
+services:
+  student-server:
+    image: student-server
+    networks:
+      - compose-student-network
+    ports:
+      - "8888:8888"
+
+  student-client:
+    image: student-client
+    networks:
+      - compose-student-network
+    environment:
+      - SOCKET_SERVER_HOST=student-server
+    depends_on:
+      - student-server
+
+
+networks:
+  compose-student-network:
